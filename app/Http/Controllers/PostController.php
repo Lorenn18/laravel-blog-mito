@@ -15,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // 1 -Retrieve all post from models Post and saved in variable
+       $posts = Post::all();
+        //dd($post);
+        // 2-Send data to view
+       return view('pages.home', compact('posts'));
     }
 
     /**
@@ -42,21 +46,22 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $posts)
+    public function show(Post $post)
     {
-        //
+        // dd($post);
+        return view('pages.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $posts)
+    public function edit(Post $post)
     {
         //
     }
@@ -65,10 +70,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $posts)
+    public function update(UpdatePostRequest $request, Post $post)
     {
         //
     }
@@ -76,11 +81,12 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $posts
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $posts)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('home')->with('status', "L'article a bien été supprimé");
     }
 }

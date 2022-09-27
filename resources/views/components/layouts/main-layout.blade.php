@@ -12,7 +12,7 @@
 </head>
 
 <body>
-
+    @include('partials._session')
     {{ $slot }}
 
 </body>
