@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -16,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         // 1 -Retrieve all post from models Post and saved in variable
-       $posts = Post::all();
+       $posts = Post::orderBy('created_at', 'desc')->limit(3)->get();
         //dd($post);
         // 2-Send data to view
        return view('pages.home', compact('posts'));
@@ -29,7 +30,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.create');
+        
     }
 
     /**
@@ -40,7 +42,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        // dd($request->all());
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'url_img' => $request->url_img,
+            'created_at'=> now(),
+        ]);
+
+        return redirect()
+        ->route('home')
+        ->with('status', 'Le post a bien été ajouté');
     }
 
     /**
