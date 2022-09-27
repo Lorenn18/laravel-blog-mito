@@ -6,14 +6,15 @@
             <div class="max-w-md mx-auto">
                 {{-- title --}}
                 <input type="text" class="block w-full rounded-lg border-gray-400" name="title"
-                    placeholder="Titre du post">
+                    placeholder="Titre du post" value="{{ old('title') }}">
+                <x-error-msg name="title" />
                 {{-- content --}}
-                <textarea name="content" id="" cols="30" rows="10" class="mt-5 block w-full rounded-lg border-gray-400"
-                    placeholder="Votre contenu..."></textarea>
+                <textarea name="content" id="" cols="30" rows="10"
+                    class="mt-5 block w-full rounded-lg border-gray-400" placeholder="Votre contenu...">{{ old('content') }}</textarea>
+                <x-error-msg name="content" />
                 {{-- image --}}
                 <input type="text" name="url_img" placeholder="Url de votre image"
-                    value="https://source.unsplash.com/640x480/?animals?1"
-                    class="block w-full rounded-lg border-gray-400">
+                    value="https://source.unsplash.com/640x480/?cars?1" class="block w-full rounded-lg border-gray-400">
                 <button class="btn-primary btn mt-6 w-full ">Envoyer</button>
             </div>
         </form>
